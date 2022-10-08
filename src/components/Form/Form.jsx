@@ -1,10 +1,11 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/operations';
-
-// import { addContact } from 'redux/slice';
+import { getContacts, getEditContact } from 'redux/selectors';
+import {
+  addContact,
+  editContact as editContactOperation,
+} from 'redux/operations';
 
 import s from './Form.module.css';
 
@@ -13,6 +14,15 @@ function Form() {
   const [phone, setPhone] = useState('');
 
   const contacts = useSelector(getContacts);
+  const editContact = useSelector(getEditContact);
+
+  useEffect(() => {
+    if (editContact) {
+      const { name, number } = editContact;
+      setName(name);
+      setPhone(number);
+    }
+  }, [editContact]);
 
   const dispatch = useDispatch();
 
@@ -46,8 +56,13 @@ function Form() {
       alert(`${contacts.name} is already in contacts`);
       return;
     }
-    dispatch(addContact({ name, phone, id: nanoid() }));
-    reset();
+    if (!editContact) {
+      dispatch(addContact({ name, phone, id: nanoid() }));
+      reset();
+    } else {
+      dispatch(editContactOperation({ name, phone, id: editContact.id }));
+      reset();
+    }
   };
 
   return (
