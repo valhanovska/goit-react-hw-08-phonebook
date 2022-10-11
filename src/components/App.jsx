@@ -1,52 +1,55 @@
-import { Route, Routes, NavLink } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useEffect, lazy } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './Layout';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+import { refreshUser } from 'redux/auth/operationsAuth';
+import { getIsRefreshing } from 'redux/auth/selectorsAuth';
 
-import s from './App.module.css';
-import { lazy, Suspense } from 'react';
-// import PrivateRoute from 'pages/PrivateRoute';
-// import ContactList from './ContactList';
+// const MyComponent = lazy(() => import('./MyComponent'));
 
-// const MyComponent = lazy(() => import('path/to/MyComponent'));
-
-const Register = lazy(() => import('../pages/Register'));
-const Login = lazy(() => import('../pages/Login'));
-const Contacts = lazy(() => import('./Contacts'));
-const PrivateRoute = lazy(() => import('pages/PrivateRoute'));
-
-// const Cast = lazy(() => import('../pages/Cast'));
-// const Reviews = lazy(() => import('../pages/Reviews'));
+const HomePage = lazy(() => import('../pages/Home'));
+const RegisterPage = lazy(() => import('../pages/Register'));
+const LoginPage = lazy(() => import('../pages/Login'));
+const ContactsPage = lazy(() => import('../pages/Contacts/Contacts'));
 
 export const App = () => {
-  return (
-    <>
-      <nav className={s.nav}>
-        <NavLink to="/login" end className={s.link}>
-          Login
-        </NavLink>
-        <NavLink to="/register" className={s.link}>
-          Register
-        </NavLink>
-      </nav>
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(getIsRefreshing);
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
 
-          <Route element={<PrivateRoute />}>
-            <Route path="/contacts" element={<Contacts />}></Route>
-          </Route>
-          {/* <Route path="/contacts" element={<Contacts />}> */}
-          {/* <Route path="cast" element={<Cast />} /> */}
-          {/* <Route path="reviews" element={<Reviews />} /> */}
-          {/* </Route> */}
-
-          <Route path="*" element={<div>Not Found</div>} />
-        </Routes>
-      </Suspense>
-
-      <ToastContainer autoClose={3000} />
-    </>
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegisterPage />}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={ContactsPage} />
+          }
+        />
+      </Route>
+    </Routes>
   );
 };
