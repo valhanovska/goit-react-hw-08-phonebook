@@ -1,0 +1,21 @@
+.item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  gap: 4px;
+}
+
+.button {
+  background-color: transparent;
+  border-radius: 20%;
+  height: 30px;
+}
