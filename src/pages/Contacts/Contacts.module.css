@@ -1,0 +1,17 @@
+.text {
+  text-align: center;
+  height: 60px;
+  background-color: rgb(72, 146, 146);
+  margin: 0;
+  padding-top: 15px;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: #010101;
+  background-color: rgb(108, 180, 180);
+  gap: 15px;
+}
