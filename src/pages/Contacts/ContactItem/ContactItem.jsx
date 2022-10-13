@@ -6,6 +6,12 @@ import s from './ContactItem.module.css';
 import { getLoading } from 'redux/Contacts/selectors';
 import { editContactAction } from 'redux/Contacts/slice';
 
+import Stack from '@mui/material/Stack';
+
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
+
 const ContactItem = ({ name, number, id }) => {
   const loading = useSelector(getLoading);
   const dispatch = useDispatch();
@@ -23,23 +29,28 @@ const ContactItem = ({ name, number, id }) => {
       <div className={s.group}>
         <p className={s.name}>{name}:</p>
         <p>{number}</p>
+
+        <Stack direction="row" spacing={1}>
+          <IconButton
+            aria-label="delete"
+            type="button"
+            className={s.button}
+            onClick={onDelete}
+            disabled={loading}
+          >
+            <DeleteIcon />
+          </IconButton>
+          <IconButton
+            aria-label="edit"
+            type="button"
+            className={s.button}
+            disabled={loading}
+            onClick={onClickEdit}
+          >
+            <EditIcon />
+          </IconButton>
+        </Stack>
       </div>
-      <button
-        type="button"
-        className={s.button}
-        onClick={onDelete}
-        disabled={loading}
-      >
-        Delete
-      </button>
-      <button
-        type="button"
-        className={s.button}
-        disabled={loading}
-        onClick={onClickEdit}
-      >
-        Edit
-      </button>
     </li>
   );
 };
