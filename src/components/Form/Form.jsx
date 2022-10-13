@@ -7,7 +7,9 @@ import {
   editContact as editContactOperation,
 } from 'redux/Contacts/operations';
 
-// import { addContact } from 'redux/slice';
+import Stack from '@mui/material/Stack';
+import AddIcCallIcon from '@mui/icons-material/AddIcCall';
+import { IconButton } from '@mui/material';
 
 import s from './Form.module.css';
 import { useEffect } from 'react';
@@ -98,10 +100,12 @@ function Form() {
           id="number"
         />
       </div>
-
-      <button className={s.button} type="submit">
-        Add contact
-      </button>
+      <Stack direction="row" spacing={1}>
+        <IconButton aria-label="add call" className={s.button} type="submit">
+          Add contact
+          <AddIcCallIcon />
+        </IconButton>
+      </Stack>
     </form>
   );
 }
