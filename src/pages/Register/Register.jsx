@@ -91,7 +91,7 @@ function Register() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Register
+              Sign up
             </Typography>
             <Box
               component="form"
@@ -137,7 +137,7 @@ function Register() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Register
+                Sign up
               </Button>
             </Box>
           </Box>
