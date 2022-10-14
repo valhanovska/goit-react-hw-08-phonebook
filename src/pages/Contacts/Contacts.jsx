@@ -18,7 +18,7 @@ function ContactsPage() {
   }, []);
 
   return (
-    <div>
+    <div className={s.wrapper}>
       <h1 className={s.text}>Phonebook</h1>
       <div className={s.container}>
         <div>
