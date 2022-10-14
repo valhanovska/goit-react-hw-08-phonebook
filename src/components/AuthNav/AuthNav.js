@@ -1,3 +1,4 @@
+// import ColorMode from 'components/ColorMode';
 import { NavLink } from 'react-router-dom';
 import s from './AuthNav.module.css';
 
@@ -8,8 +9,9 @@ export const AuthNav = () => {
         Register
       </NavLink>
       <NavLink className={s.link} to="/login">
-        Log In
+        Sign in
       </NavLink>
+      {/* <ColorMode /> */}
     </div>
   );
 };
