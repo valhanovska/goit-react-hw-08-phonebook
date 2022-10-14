@@ -3,6 +3,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgb(54, 244, 238);
+  background: linear-gradient(
+    77deg,
+    rgba(54, 244, 238, 1) 0%,
+    rgba(255, 47, 47, 1) 44%,
+    rgba(186, 255, 0, 1) 97%
+  );
 }
 
 .title {
