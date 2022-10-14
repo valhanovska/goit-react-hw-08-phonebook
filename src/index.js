@@ -23,17 +23,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </React.StrictMode>
 );
-
-// index.js
-
-// import { ColorModeScript } from '@chakra-ui/react';
-// import theme from './theme';
-
-// const rootElement = document.getElementById('root');
-// ReactDOM.createRoot(rootElement).render(
-//   <>
-//     {/* 👇 Here's the script */}
-//     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-//     <App />
-//   </>
-// );
