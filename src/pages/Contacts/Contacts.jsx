@@ -3,11 +3,19 @@ import ContactList from './ContactList';
 import Filter from '../../components/Filter';
 
 import s from './Contacts.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/Contacts/selectors';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/Contacts/operations';
 
 function ContactsPage() {
   const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
