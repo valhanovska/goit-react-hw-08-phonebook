@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgoit_react_hw_08_phonebook=self.webpackChunkgoit_react_hw_08_phonebook||[]).push([[171],{2171:function(e,n,a){a.r(n),a.d(n,{default:function(){return i}});var o="Home_container__w+u63",r="Home_title__L087v",c=a(184);function i(){return(0,c.jsx)("div",{className:o,children:(0,c.jsxs)("h1",{className:r,children:["Task manager welcome page"," ",(0,c.jsx)("span",{role:"img","aria-label":"Greeting icon",children:"\ud83d\udc81\u200d\u2640\ufe0f"})]})})}}}]);
-//# sourceMappingURL=171.8ed0cd54.chunk.js.map
